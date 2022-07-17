@@ -10,8 +10,8 @@ public interface BaseService<M,I,E> {
 
     Object           create(E entity);
     Object           update(I id, E entity) ;
-    boolean     delete(I id) ;
+    boolean          delete(I id) ;
     Object           getOne(I id) ;
-    List<E>     getAll();
-    Page<E> getAll(Pageable pageable);
+    List<E>          getAll();
+    Page<E>          getAll(Pageable pageable);
 }
