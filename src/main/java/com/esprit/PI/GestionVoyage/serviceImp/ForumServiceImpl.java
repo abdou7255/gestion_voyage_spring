@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -20,13 +21,15 @@ public class ForumServiceImpl implements ForumServicee {
     private ForumRepository forumRepository;
     @Override
     public Object create(Forum entity) {
+        entity.setCreatedDate(new Date(System.currentTimeMillis()));
+        entity.setUpdatedDate(null);
         return forumRepository.save(entity);
     }
 
     @Override
     public Object update(Long id, Forum entity) {
         try{
-
+            entity.setUpdatedDate(new Date(System.currentTimeMillis()));
             entity.setIdForum(id);
             return forumRepository.save(entity);}
         catch (EntityNotFoundException e){

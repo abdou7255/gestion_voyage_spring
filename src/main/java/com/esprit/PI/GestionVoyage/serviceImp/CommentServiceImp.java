@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +24,8 @@ public class CommentServiceImp implements CommentService {
     private CommentRepository commentRepository;
     @Override
     public Object create(Comment entity) {
+        entity.setCreatedDate(new Date(System.currentTimeMillis()));
+        entity.setUpdatedDate(null);
         return commentRepository.save(entity);
     }
 
@@ -30,7 +33,9 @@ public class CommentServiceImp implements CommentService {
     public Object update(Long id, Comment entity) {
         try{
 
+            entity.setUpdatedDate(new Date(System.currentTimeMillis()));
             entity.setIdCommment(id);
+            entity.setCreatedDate(new Date(System.currentTimeMillis()));
             return commentRepository.save(entity);}
         catch (EntityNotFoundException e){
             System.out.println (e.getMessage());

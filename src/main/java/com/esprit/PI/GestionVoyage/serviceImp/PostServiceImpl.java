@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -20,13 +21,16 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
     @Override
     public Object create(Post entity) {
+
+        entity.setCreatedDate(new Date(System.currentTimeMillis()));
+        entity.setUpdatedDate(null);
         return postRepository.save(entity);
     }
 
     @Override
     public Object update(Long id, Post entity) {
         try{
-
+            entity.setUpdatedDate(new Date(System.currentTimeMillis()));
             entity.setIdPost(id);
             return postRepository.save(entity);}
         catch (EntityNotFoundException e){

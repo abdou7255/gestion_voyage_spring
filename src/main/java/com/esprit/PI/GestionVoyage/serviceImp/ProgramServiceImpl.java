@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -21,6 +22,7 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     public Object create(Program entity) {
+        entity.setStartDate(new Date(System.currentTimeMillis()));
         return programRepository.save(entity);
     }
 
