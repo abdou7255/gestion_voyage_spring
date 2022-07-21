@@ -18,9 +18,13 @@ public class Program implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProgram;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     private String periode;
+    @Column(nullable = false)
     private Date startDate;
+    @Column(nullable = false)
     private Date endDate;
 
     @ManyToOne

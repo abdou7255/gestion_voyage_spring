@@ -16,7 +16,9 @@ public class TripInvitation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTripInvitation;
+    @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
     private String email;
 
     @ManyToOne

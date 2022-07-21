@@ -19,8 +19,11 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployee;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
 
     @JsonIgnoreProperties(value="employeeSender", allowSetters=true,allowGetters = false)

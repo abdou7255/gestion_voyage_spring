@@ -18,7 +18,9 @@ public class Feedback implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFeedBack;
+    @Column(nullable = false)
     private Date DateFeedBack;
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne

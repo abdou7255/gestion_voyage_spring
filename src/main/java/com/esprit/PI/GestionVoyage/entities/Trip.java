@@ -20,8 +20,11 @@ public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTrip;
+    @Column(nullable = false)
     private String destination;
+    @Column(nullable = false)
     private String periode;
+    @Column(nullable = false)
     private Date tripDate;
 
     @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)

@@ -22,6 +22,12 @@ public class FeedbackController {
         return feedBackService.create(entity);
     }
 
+    @PostMapping("/sendMail")
+    public void sendFeedBackMail() {
+
+        feedBackService.sendSimpleEmail("arfaoui.abdelkader18@gmail.com","testAPIMail","helllo gadour");
+    }
+
     @PutMapping("/{id}")
     public Object update(@PathVariable Long id,@RequestBody Feedback entity) {
         return feedBackService.update(id,entity);
