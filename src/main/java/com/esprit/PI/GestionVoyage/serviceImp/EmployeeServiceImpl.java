@@ -55,4 +55,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<Employee> getAll(Pageable pageable) {
         Page<Employee> zonePage = employeeRepository.findAll(pageable);
         return new PageImpl<>(zonePage.getContent(), pageable, zonePage.getTotalElements());    }
+
+    @Override
+    public Employee findEmployeeByEmail(String email) {
+        Employee emp = employeeRepository.findEmployeeByEmail(email);
+        return emp;
+    }
 }
