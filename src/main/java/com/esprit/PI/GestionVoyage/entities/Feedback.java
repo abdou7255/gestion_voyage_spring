@@ -30,6 +30,6 @@ public class Feedback implements Serializable {
     private Employee employeeReceiver;
 
     @ManyToOne
-    @JoinColumn (name = "idTrip")
-    private Trip trip;
+    @JoinColumn (name = "idProgram")
+    private Program program;
 }

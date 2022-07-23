@@ -21,21 +21,23 @@ public class Trip implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTrip;
     private String destination;
-    private String periode;
-    private Date tripDate;
+    private Long duration;
+    private String accommodation;
+    private Date startDate;
+    private Date endDate;
+    @Enumerated(EnumType.STRING)
+    private TripType tripType;
+
 
     @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
     private List<TripInvitation> tripInvitations;
 
-    @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
-    @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
-    private List<Feedback> feedbacks;
+    @ManyToOne
+    @JoinColumn (name = "idProgram")
+    private Program program;
 
-    @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
-    @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
-    private List<Program> programs;
-
-    @Enumerated(EnumType.STRING)
-    private TripObject tripObject;
+    @ManyToOne
+    @JoinColumn (name = "idEmployee")
+    private Employee employee;
 }

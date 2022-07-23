@@ -17,14 +17,13 @@ public class TripInvitation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTripInvitation;
     private String status;
-    private String email;
 
     @ManyToOne
     @JoinColumn (name = "idEmployee",insertable = false,updatable = false)
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn (name = "idEmployee",insertable = false,updatable = false)
+    @JoinColumn (name = "idTrip",insertable = false,updatable = false)
     private Trip trip;
 
 }

@@ -6,6 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Data
@@ -19,16 +23,13 @@ public class Program implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProgram;
     private String description;
-    private String periode;
-    private Date startDate;
-    private Date endDate;
 
-    @ManyToOne
-    @JoinColumn (name = "idTrip")
-    private Trip trip;
 
-    @ManyToOne
-    @JoinColumn (name = "idEmployee")
-    private Employee employee;
+    @JsonIgnoreProperties(value="program", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "program",fetch = FetchType.LAZY)
+    private List<Trip> trips;
 
+    @JsonIgnoreProperties(value="program", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "program",fetch = FetchType.LAZY)
+    private List<Feedback> feedbacks;
 }
