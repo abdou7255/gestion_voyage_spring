@@ -18,6 +18,7 @@ public class TripInvitationDto implements Serializable {
 
     private EmployeeDto employee;
 
-    private TripDto trip;
+    private TripDto trip1;
+    private TripDto trip2;
 
 }

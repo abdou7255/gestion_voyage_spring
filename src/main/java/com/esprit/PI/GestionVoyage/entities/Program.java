@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Builder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties({ "feedbacks", "trips" })
 public class Program implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

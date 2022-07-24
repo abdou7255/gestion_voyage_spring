@@ -1,6 +1,8 @@
 package com.esprit.PI.GestionVoyage.controller;
 import com.esprit.PI.GestionVoyage.entities.Employee;
+import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
+import com.esprit.PI.GestionVoyage.service.ProgramService;
 import com.esprit.PI.GestionVoyage.service.TripInvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ public class TripInvitationController {
 
     @Autowired
     private TripInvitationService tripInvitationService;
+
     
     @PostMapping
     public Object create(@RequestBody TripInvitation entity) {
@@ -28,6 +31,11 @@ public class TripInvitationController {
     @PutMapping("/{id}")
     public Object update(@PathVariable Long id,@RequestBody TripInvitation entity) {
         return tripInvitationService.update(id,entity);
+    }
+
+    @PutMapping("/accept/{id}")
+    public Object accept(@PathVariable Long id) {
+        return tripInvitationService.accept(id);
     }
 
     @DeleteMapping("/{id}")

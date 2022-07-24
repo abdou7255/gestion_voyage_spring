@@ -83,7 +83,7 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        Trip t = new Trip(null, "Tunis", 3l, "Marriot Hotel", d1, d2, TripType.Business, null, null, e);
+        Trip t = new Trip(null, "Tunis", 3l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
 
         e = new Employee();
@@ -97,7 +97,7 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        t = new Trip(null, "Tunis", 4l, "Marriot Hotel", d1, d2, TripType.Business, null, null, e);
+        t = new Trip(null, "Tunis", 4l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
 
         e = new Employee();
@@ -111,7 +111,7 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        t = new Trip(null, "Tunis", 6l, "Marriot Hotel", d1, d2, TripType.Business, null, null, e);
+        t = new Trip(null, "Tunis", 6l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
 
         return  "Done";

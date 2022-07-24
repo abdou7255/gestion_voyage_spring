@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Builder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties({ "tripInvitations2", "tripInvitations1", "program", "employee" })
 public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +31,13 @@ public class Trip implements Serializable {
     private TripType tripType;
 
 
-    @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
-    @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
-    private List<TripInvitation> tripInvitations;
+    @JsonIgnoreProperties(value="trip1", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "trip1",fetch = FetchType.LAZY)
+    private List<TripInvitation> tripInvitations1;
+
+    @JsonIgnoreProperties(value="trip2", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "trip2",fetch = FetchType.LAZY)
+    private List<TripInvitation> tripInvitations2;
 
     @ManyToOne
     @JoinColumn (name = "idProgram")
@@ -39,5 +45,6 @@ public class Trip implements Serializable {
 
     @ManyToOne
     @JoinColumn (name = "idEmployee")
+    @JsonIgnoreProperties(value="trips")
     private Employee employee;
 }

@@ -56,15 +56,15 @@ public class TripServiceImpl implements TripService {
         }
         // create trip invites
         for (Trip trip:sHotel){
-            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip);
+            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip, t);
             tripInvitationService.create(inv);
         }
         for (Trip trip:sType){
-            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip);
+            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip, t);
             tripInvitationService.create(inv);
         }
         for (Trip trip:sProfession){
-            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip);
+            TripInvitation inv = new TripInvitation(null, "False", t.getEmployee(), trip, t);
             tripInvitationService.create(inv);
         }
 
@@ -74,9 +74,9 @@ public class TripServiceImpl implements TripService {
     @Override
     public Object update(Long id, Trip entity) {
         try{
-
             entity.setIdTrip(id);
-            return tripRepository.save(entity);}
+            return tripRepository.save(entity);
+        }
         catch (EntityNotFoundException e){
             System.out.println (e.getMessage());
             return null;}
