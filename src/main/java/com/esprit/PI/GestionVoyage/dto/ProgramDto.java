@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,12 +17,9 @@ import java.util.Date;
 public class ProgramDto implements Serializable {
     private Long idProgram;
     private String description;
-    private String periode;
-    private Date startDate;
-    private Date endDate;
 
-    private TripDto trip;
-
-    private EmployeeDto employee;
+    private List<TripDto> trips;
+    
+    private List<FeedbackDto> feedbacks;
 
 }

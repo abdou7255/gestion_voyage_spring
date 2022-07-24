@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.controller;
 
+import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import java.util.List;
 public class TripController {
     @Autowired
     private TripService tripService;
+    
     @PostMapping
     public Object create(@RequestBody Trip entity) {
-
+        Employee testEmp = new Employee();
+        testEmp.setIdEmployee(1l);
+        entity.setEmployee(testEmp);
         return tripService.create(entity);
     }
 
@@ -37,7 +41,7 @@ public class TripController {
         return  tripService.getOne(id);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Trip> getAll() {
 
         return tripService.getAll();

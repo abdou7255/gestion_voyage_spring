@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class TripInvitationDto implements Serializable {
     private Long idTripInvitation;
     private String status;
-    private String email;
 
     private EmployeeDto employee;
 

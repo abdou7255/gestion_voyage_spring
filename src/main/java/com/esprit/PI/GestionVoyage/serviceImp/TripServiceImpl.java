@@ -1,7 +1,6 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
 import com.esprit.PI.GestionVoyage.entities.Trip;
-import com.esprit.PI.GestionVoyage.entities.TripInvitation;
 import com.esprit.PI.GestionVoyage.repository.TripRepository;
 import com.esprit.PI.GestionVoyage.service.TripService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -21,8 +19,6 @@ public class TripServiceImpl implements TripService {
     private TripRepository tripRepository;
     @Override
     public Object create(Trip entity) {
-        entity.setTripDate(new Date(System.currentTimeMillis()));
-
         return tripRepository.save(entity);
     }
 

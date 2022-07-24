@@ -16,6 +16,7 @@ public class ProgramController {
 
     @Autowired
     private ProgramService programService;
+    
     @PostMapping
     public Object create(@RequestBody Program entity) {
 
@@ -38,7 +39,7 @@ public class ProgramController {
         return  programService.getOne(id);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Program> getAll() {
 
         return programService.getAll();

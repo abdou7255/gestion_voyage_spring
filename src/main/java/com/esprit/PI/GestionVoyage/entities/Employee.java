@@ -45,7 +45,7 @@ public class Employee implements Serializable {
 
     @JsonIgnoreProperties(value="employee", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
-    private List<Program>programs;
+    private List<Trip>trips;
 
     @JsonIgnoreProperties(value="employee", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
