@@ -2,7 +2,16 @@ package com.esprit.PI.GestionVoyage.service;
 
 import com.esprit.PI.GestionVoyage.dto.FeedbackDto;
 import com.esprit.PI.GestionVoyage.entities.Feedback;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-public interface FeedBackService extends BaseService<FeedbackDto,Long, Feedback>{
+import java.util.List;
+
+public interface FeedBackService {
     public void sendSimpleEmail(String toEmail,String subject,String body);
+    Object           create(Feedback entity);
+    Object           update(Long id, Feedback entity) ;
+    boolean          delete(Long id) ;
+    Object           getOne(Long id) ;
+    List<Feedback> getAll();
 }

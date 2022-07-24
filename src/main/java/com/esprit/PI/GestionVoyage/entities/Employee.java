@@ -62,7 +62,7 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
     private List<React>reacts;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn( name="idCompany" )
     private Company company;
 

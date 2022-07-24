@@ -16,10 +16,10 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-    @PostMapping
-    public Object create(@RequestBody Employee entity) {
+    @PostMapping("/{id}")
+    public Object create(@RequestBody Employee entity, @PathVariable Long id) {
 
-        return employeeService.create(entity);
+        return employeeService.create(id,entity);
     }
 
     @PutMapping("/{id}")

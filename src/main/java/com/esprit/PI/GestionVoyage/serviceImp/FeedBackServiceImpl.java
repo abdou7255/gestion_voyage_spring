@@ -54,10 +54,7 @@ public class FeedBackServiceImpl implements FeedBackService {
         return feedBackRepository.findAll();
     }
 
-    @Override
-    public Page<Feedback> getAll(Pageable pageable) {
-        Page<Feedback> zonePage = feedBackRepository.findAll(pageable);
-        return new PageImpl<>(zonePage.getContent(), pageable, zonePage.getTotalElements());    }
+
 
     @Autowired
     private JavaMailSender mailSender;

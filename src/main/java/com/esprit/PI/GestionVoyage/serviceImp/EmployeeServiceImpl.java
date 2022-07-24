@@ -1,7 +1,9 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
+import com.esprit.PI.GestionVoyage.entities.Company;
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.EmployeeInvitaion;
+import com.esprit.PI.GestionVoyage.repository.CompanyRepository;
 import com.esprit.PI.GestionVoyage.repository.EmployeeRepository;
 import com.esprit.PI.GestionVoyage.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +20,13 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private CompanyRepository companyRepository;
     @Override
-    public Object create(Employee entity) {
+    public Object create(Long idCompany ,Employee entity) {
+        Company c = companyRepository.findById(idCompany).get();
+        c.getEmployees().add(entity);
+        entity.setCompany(c);
         return employeeRepository.save(entity);
     }
 

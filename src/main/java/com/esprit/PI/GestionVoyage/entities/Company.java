@@ -24,9 +24,9 @@ public class Company implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn( name="idEmployee" )
-    private Employee employee;
+    private List<Employee> employees;
 
     @OneToOne
     @JoinColumn( name="idForum" )

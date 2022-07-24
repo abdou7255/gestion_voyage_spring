@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/feedback")
-@CrossOrigin
+@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 public class FeedbackController {
 
@@ -18,7 +20,6 @@ public class FeedbackController {
     private FeedBackService feedBackService;
     @PostMapping
     public Object create(@RequestBody Feedback entity) {
-
         return feedBackService.create(entity);
     }
 
@@ -50,9 +51,6 @@ public class FeedbackController {
         return feedBackService.getAll();
     }
 
-    @GetMapping("/page")
-    public Page<Feedback> getAll(Pageable pageable) {
-        return  feedBackService.getAll(pageable);
-    }
+
 
 }
