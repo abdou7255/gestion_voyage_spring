@@ -1,6 +1,5 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
-import com.esprit.PI.GestionVoyage.entities.Comment;
 import com.esprit.PI.GestionVoyage.entities.Company;
 import com.esprit.PI.GestionVoyage.repository.CompanyRepository;
 import com.esprit.PI.GestionVoyage.service.CompanyService;
@@ -19,6 +18,7 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
+
     @Override
     public Object create(Company entity) {
         return companyRepository.save(entity);
@@ -26,12 +26,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Object update(Long id, Company entity) {
-        try{
+        try {
 
             entity.setIdCompany(id);
-            return companyRepository.save(entity);}
-        catch (EntityNotFoundException e){
-            System.out.println (e.getMessage());
+            return companyRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -57,5 +57,10 @@ public class CompanyServiceImpl implements CompanyService {
         Page<Company> zonePage = companyRepository.findAll(pageable);
         return new PageImpl<>(zonePage.getContent(), pageable, zonePage.getTotalElements());
 
+    }
+
+    @Override
+    public Company findByEmail(String email) {
+        return companyRepository.findByEmail(email);
     }
 }
