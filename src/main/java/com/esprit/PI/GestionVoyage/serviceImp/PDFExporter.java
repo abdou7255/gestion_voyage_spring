@@ -1,22 +1,30 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
 import com.esprit.PI.GestionVoyage.entities.Employee;
+import com.esprit.PI.GestionVoyage.entities.Feedback;
+import com.esprit.PI.GestionVoyage.repository.EmployeeRepository;
+import com.esprit.PI.GestionVoyage.repository.FeedBackRepository;
+import com.esprit.PI.GestionVoyage.service.FeedBackService;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeesPDFExporter {
-    private List<Employee> listEmployees;
+public class PDFExporter {
+    @Autowired
+    private FeedBackRepository feedBackService;
 
-    public EmployeesPDFExporter(List<Employee> listEmployees) {
-        this.listEmployees = listEmployees;
+
+    public PDFExporter(Long id) {
+
     }
 
     private void writeTableHeader(PdfPTable table) {
@@ -27,25 +35,32 @@ public class EmployeesPDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
-        cell.setPhrase(new Phrase("User ID", font));
+        cell.setPhrase(new Phrase("Feedback ID", font));
 
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("E-mail", font));
+        cell.setPhrase(new Phrase("Sender Name", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Full Name", font));
+        cell.setPhrase(new Phrase("Receiver Name", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Profession", font));
+        cell.setPhrase(new Phrase("Date", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Content", font));
         table.addCell(cell);
     }
     private void writeTableData(PdfPTable table) {
-        for (Employee employee : listEmployees) {
-            table.addCell(String.valueOf(employee.getIdEmployee()));
-            table.addCell(employee.getEmail());
-            table.addCell(employee.getName());
-            table.addCell(employee.getProfession().getName().toString());
+        List<Feedback> listFeedback=new ArrayList<>();
+        for(Feedback f : feedBackService.findAll()){
+            listFeedback.add(f);
+        }
+        for (Feedback feedback : listFeedback) {
+            table.addCell(String.valueOf(feedback.getIdFeedBack()));
+            table.addCell(feedback.getEmployeeSender().getName());
+            table.addCell(feedback.getEmployeeReceiver().getName());
+            table.addCell(String.valueOf(feedback.getDateFeedBack()));
+            table.addCell(feedback.getContent());
 
         }
     }
@@ -60,9 +75,9 @@ public class EmployeesPDFExporter {
         Paragraph p = new Paragraph("List of Employees", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(p);
-        PdfPTable table = new PdfPTable(4);
+        PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f});
+        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f,1.5f});
         table.setSpacingBefore(10);
         writeTableHeader(table);
         writeTableData(table);

@@ -3,6 +3,7 @@ package com.esprit.PI.GestionVoyage.service;
 import com.esprit.PI.GestionVoyage.dto.EmployeeDto;
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Feedback;
+import com.esprit.PI.GestionVoyage.entities.Trip;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,6 @@ public interface EmployeeService {
     Object           getOne(Long id) ;
     List<Employee> getAll();
     Page<Employee> getAll(Pageable pageable);
+    List<Employee> getEmployessByName(String name);
+    List<Trip> getTripsByEmployee(Long idEmp);
 }

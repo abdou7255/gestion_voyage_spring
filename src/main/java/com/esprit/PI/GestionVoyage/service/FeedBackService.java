@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FeedBackService {
     public void sendSimpleEmail(String toEmail,String subject,String body);
-    Object           create(Feedback entity);
+    Object           create(Long idEmp,Long idEmpR,Long idTrip,Feedback entity);
     Object           update(Long id, Feedback entity) ;
     boolean          delete(Long id) ;
     Object           getOne(Long id) ;

@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -34,14 +35,17 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employeeReceiver",fetch = FetchType.LAZY)
     private List<Message>messgaeReceiver;
 
+    @JsonIgnore
     @JsonIgnoreProperties(value="employee", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
     private List<TripInvitation>tripInvitations;
 
+    @JsonIgnore
     @JsonIgnoreProperties(value="employeeSender", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employeeSender",fetch = FetchType.LAZY)
     private List<Feedback>feedbacksSender;
 
+    @JsonIgnore
     @JsonIgnoreProperties(value="employeeReceiver", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employeeReceiver",fetch = FetchType.LAZY)
     private List<Feedback>feedbacksReceiver;
@@ -61,6 +65,7 @@ public class Employee implements Serializable {
     @JsonIgnoreProperties(value="employee", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
     private List<React>reacts;
+
 
     @ManyToOne
     @JoinColumn( name="idCompany" )

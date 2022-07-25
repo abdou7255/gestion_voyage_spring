@@ -2,7 +2,7 @@ package com.esprit.PI.GestionVoyage.controller;
 
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.service.StatisticService;
-import com.esprit.PI.GestionVoyage.serviceImp.EmployeesPDFExporter;
+import com.esprit.PI.GestionVoyage.serviceImp.PDFExporter;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping("/pdfListEmployee")
+@RequestMapping("/pdfListFeedback")
 @CrossOrigin
 @RestController
 public class PDFExporterController {
@@ -31,9 +32,7 @@ public class PDFExporterController {
         String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        List<Employee> listEmployee =statisticService.listEmployeesByCompany(id) ;
-
-        EmployeesPDFExporter exporter = new EmployeesPDFExporter(listEmployee);
+        PDFExporter exporter = new PDFExporter(id);
         exporter.export(response);
 
     }

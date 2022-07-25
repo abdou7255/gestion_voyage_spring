@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -24,13 +25,13 @@ public class Trip implements Serializable {
     private String destination;
     @Column(nullable = false)
     private String periode;
-    @Column(nullable = false)
     private Date tripDate;
 
+    @JsonIgnore
     @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
     private List<TripInvitation> tripInvitations;
-
+    @JsonIgnore
     @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
     private List<Feedback> feedbacks;

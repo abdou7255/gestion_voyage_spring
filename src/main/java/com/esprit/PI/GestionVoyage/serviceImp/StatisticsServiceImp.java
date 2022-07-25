@@ -25,14 +25,16 @@ public class StatisticsServiceImp implements StatisticService {
     @Autowired
     private PostRepository postRepository;
     @Override
-    public Integer employeesByCompany(Long idComapny) {
+    public Number employeesByCompany(Long idComapny) {
         Company c = companyRepository.findById(idComapny).get();
+//        System.out.println(c.getEmployees());
         return c.getEmployees().size();
     }
 
     @Override
     public List<Employee> listEmployeesByCompany(Long idComapny) {
         Company c = companyRepository.findById(idComapny).get();
+
         return c.getEmployees();
     }
 

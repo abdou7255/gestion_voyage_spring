@@ -22,11 +22,13 @@ public class TripInvitation implements Serializable {
     private String email;
 
     @ManyToOne
-    @JoinColumn (name = "idEmployee",insertable = false,updatable = false)
+    @JoinColumn(name = "id_employee")
+//    @JoinColumn (name = "idEmployee",insertable = true,updatable = true)
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn (name = "idEmployee",insertable = false,updatable = false)
+    @JoinColumn(name = "id_trip")
+//    @JoinColumn (name = "idTrip",insertable = true,updatable = true)
     private Trip trip;
 
 }

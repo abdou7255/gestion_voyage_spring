@@ -19,14 +19,14 @@ public class FeedbackController {
     @Autowired
     private FeedBackService feedBackService;
     @PostMapping
-    public Object create(@RequestBody Feedback entity) {
-        return feedBackService.create(entity);
+    public Object create(@RequestParam("idSender") Long idEmpSender,@RequestParam("idReceiver") Long idReceiver,@RequestParam("idTrip") Long idTrip,@RequestBody Feedback entity) {
+        return feedBackService.create(idEmpSender,idReceiver,idTrip,entity);
     }
 
-    @PostMapping("/sendMail")
-    public void sendFeedBackMail() {
+    @GetMapping("/sendMail")
+    public void sendFeedBackMail(@RequestParam("subject") String subject) {
 
-        feedBackService.sendSimpleEmail("arfaoui.abdelkader18@gmail.com","testAPIMail","helllo gadour");
+        feedBackService.sendSimpleEmail("arfaoui.abdelkader18@gmail.com",subject,"You have Feedback Mail ");
     }
 
     @PutMapping("/{id}")
