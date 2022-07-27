@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class ReactServiceImpl implements ReactService {
 
     @Override
     public Object create(React entity) {
+
+        entity.setReactDate(new Date(System.currentTimeMillis()));
         return reactRepository.save(entity);
     }
 

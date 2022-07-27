@@ -18,4 +18,6 @@ public interface EmployeeService {
     Page<Employee> getAll(Pageable pageable);
     List<Employee> getEmployessByName(String name);
     List<Trip> getTripsByEmployee(Long idEmp);
+    Employee findEmployeeByEmail(String email);
+
 }
