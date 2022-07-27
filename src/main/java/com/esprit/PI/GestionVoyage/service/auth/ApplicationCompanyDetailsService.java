@@ -22,7 +22,15 @@ public class ApplicationCompanyDetailsService implements ApplicationUserDetailsS
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Company company=companyService.findByEmail(email);
-        return new User(company.getEmail(),company.getPassword(), Collections.emptyList());
+        Company company=companyService.findCompanyByEmail(email);
+        if(company != null){
+            return new User(company.getEmail(),company.getPassword(), Collections.emptyList());
+        }else {
+            throw new UsernameNotFoundException("Entreprise inexistante");
+        }
+    }
+
+    public Company loadUserByUsernameAndPassword(String email,String password) throws UsernameNotFoundException {
+        return companyService.findCompanyByEmailAndPassword(email,password);
     }
 }

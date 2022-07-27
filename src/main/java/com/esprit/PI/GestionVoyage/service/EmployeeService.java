@@ -19,5 +19,6 @@ public interface EmployeeService {
     List<Employee> getEmployessByName(String name);
     List<Trip> getTripsByEmployee(Long idEmp);
     Employee findEmployeeByEmail(String email);
+    Employee findEmployeeByEmailAndPassword(String email,String password);
 
 }

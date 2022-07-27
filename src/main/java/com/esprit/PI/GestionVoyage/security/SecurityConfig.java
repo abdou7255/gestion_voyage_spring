@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.security;
 
+import com.esprit.PI.GestionVoyage.service.auth.ApplicationCompanyDetailsService;
 import com.esprit.PI.GestionVoyage.service.auth.ApplicationEmployeeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +18,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private ApplicationEmployeeDetailsService applicationUserDetailsService;
+    private ApplicationEmployeeDetailsService applicationEmployeeDetailsService;
+    @Autowired
+    private ApplicationCompanyDetailsService applicationCompanyDetailsService;
     @Autowired
     private ApplicationRequestFilter applicationRequestFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(applicationUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(applicationEmployeeDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(applicationCompanyDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -35,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                http .csrf().disable()
 
                .authorizeRequests()
-                .antMatchers("/**/**/authenticate").permitAll()
+               .antMatchers("/**/login/authenticate/company").permitAll()
+                .antMatchers("/**/login/authenticate/employee").permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
