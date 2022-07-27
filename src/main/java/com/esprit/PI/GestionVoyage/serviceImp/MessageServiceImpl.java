@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -20,6 +21,7 @@ public class MessageServiceImpl implements MessageService {
     private MessageRepository messageRepository;
     @Override
     public Object create(Message entity) {
+        entity.setDateMessage(new Date(System.currentTimeMillis()));
         return messageRepository.save(entity);
     }
 

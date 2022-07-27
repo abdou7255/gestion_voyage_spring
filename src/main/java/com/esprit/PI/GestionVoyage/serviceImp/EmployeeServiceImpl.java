@@ -85,4 +85,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return trips;
     }
+    
+    @Override
+    public Employee findEmployeeByEmail(String email) {
+        Employee emp = employeeRepository.findEmployeeByEmail(email);
+        return emp;
+    }
 }
