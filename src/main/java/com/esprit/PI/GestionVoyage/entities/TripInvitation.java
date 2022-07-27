@@ -18,6 +18,7 @@ public class TripInvitation implements Serializable {
     private Long idTripInvitation;
     private String status;
 
+    
     @ManyToOne
     @JoinColumn (name = "idEmployee",insertable = true,updatable = false)
     private Employee employee;
