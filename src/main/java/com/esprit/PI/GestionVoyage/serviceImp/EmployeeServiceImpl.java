@@ -61,4 +61,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee emp = employeeRepository.findEmployeeByEmail(email);
         return emp;
     }
+
+    @Override
+    public Employee findEmployeeByEmailAddressAndPassword(String email, String password) {
+        Employee emp = employeeRepository.findEmployeeByEmailAddressAndPassword(email,password);
+        return emp;
+    }
 }

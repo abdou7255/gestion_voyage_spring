@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     @Query(value = "select c from Employee c where c.email=:email")
     Employee findEmployeeByEmail(String email);
+    @Query(value = "select c from Employee c where c.email=:email and password=:password")
+    Employee findEmployeeByEmailAddressAndPassword(String email,String password);
 
 
 }

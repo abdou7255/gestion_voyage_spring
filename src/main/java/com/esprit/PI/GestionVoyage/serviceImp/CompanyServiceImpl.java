@@ -1,6 +1,7 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
 import com.esprit.PI.GestionVoyage.entities.Company;
+import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.repository.CompanyRepository;
 import com.esprit.PI.GestionVoyage.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +61,15 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company findByEmail(String email) {
-        return companyRepository.findByEmail(email);
+    public Company findCompanyByEmailAddress(String emailAddress) {
+        Company company = companyRepository.findCompanyByEmailAddress(emailAddress);
+        return company;
+    }
+
+    @Override
+    public Company findCompanyByEmailAddressAndPassword(String emailAddress, String password) {
+
+        Company company = companyRepository.findCompanyByEmailAddressAndPassword(emailAddress,password);
+        return company;
     }
 }

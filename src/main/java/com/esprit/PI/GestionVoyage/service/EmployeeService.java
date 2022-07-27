@@ -5,5 +5,6 @@ import com.esprit.PI.GestionVoyage.entities.Employee;
 
 public interface EmployeeService extends BaseService<EmployeeDto,Long, Employee>{
     Employee findEmployeeByEmail(String email);
+    Employee findEmployeeByEmailAddressAndPassword(String email,String password);
 
 }

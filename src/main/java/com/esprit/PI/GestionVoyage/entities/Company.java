@@ -19,7 +19,7 @@ public class Company implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCompany;
-    private String email;
+    private String emailAddress;
     private String password;
 
     @OneToOne
