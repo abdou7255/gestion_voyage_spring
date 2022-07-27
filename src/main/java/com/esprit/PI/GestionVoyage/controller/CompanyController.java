@@ -18,7 +18,10 @@ public class CompanyController {
     private CompanyService companyService;
     @PostMapping
     public Object create(@RequestBody Company entity) {
-
+        Company c = companyService.findCompanyByEmail(entity.getEmail());
+        if(c != null) {
+            return new String("cette entreprise existe déja");
+        }
         return companyService.create(entity);
     }
 
