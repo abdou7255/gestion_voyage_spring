@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.controller;
 
+import com.esprit.PI.GestionVoyage.entities.Company;
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.service.EmployeeService;
@@ -23,7 +24,10 @@ public class EmployeeController {
     private StatisticService statisticService;
     @PostMapping("/{id}")
     public Object create(@RequestBody Employee entity, @PathVariable Long id) {
-
+        Employee e = employeeService.findEmployeeByEmail(entity.getEmail());
+        if(e != null) {
+            return new String("cet employé existe déja");
+        }
         return employeeService.create(id,entity);
     }
 
