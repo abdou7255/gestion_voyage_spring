@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -21,11 +22,13 @@ public class TripInvitation implements Serializable {
     @Column(nullable = false)
     private String email;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_employee")
 //    @JoinColumn (name = "idEmployee",insertable = true,updatable = true)
     private Employee employee;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_trip")
 //    @JoinColumn (name = "idTrip",insertable = true,updatable = true)
