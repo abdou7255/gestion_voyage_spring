@@ -1,6 +1,7 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
 import com.esprit.PI.GestionVoyage.entities.Employee;
+import com.esprit.PI.GestionVoyage.entities.Feedback;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
 import com.esprit.PI.GestionVoyage.repository.TripRepository;
@@ -68,5 +69,11 @@ public class TripServiceImpl implements TripService {
             employees.add(ti.getEmployee());
         }
         return employees;
+    }
+
+    @Override
+    public Number getFeedBackByTrip(Long idTrip) {
+        Trip t =tripRepository.findById(idTrip).get();
+        return  t.getFeedbacks().size();
     }
 }

@@ -27,7 +27,7 @@ public class StatisticsServiceImp implements StatisticService {
     @Override
     public Number employeesByCompany(Long idComapny) {
         Company c = companyRepository.findById(idComapny).get();
-//        System.out.println(c.getEmployees());
+        System.out.println(c.getEmployees());
         return c.getEmployees().size();
     }
 

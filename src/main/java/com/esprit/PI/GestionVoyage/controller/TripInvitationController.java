@@ -1,4 +1,5 @@
 package com.esprit.PI.GestionVoyage.controller;
+import com.esprit.PI.GestionVoyage.entities.Feedback;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
 import com.esprit.PI.GestionVoyage.service.TripInvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RequestMapping("/tripInvitation")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class TripInvitationController {
 
@@ -43,6 +44,11 @@ public class TripInvitationController {
     public List<TripInvitation> getAll() {
 
         return tripInvitationService.getAll();
+    }
+    @GetMapping("/getFeedBackByTripInv/{id}")
+    public Number getFeedBackByTripInv(@PathVariable("id") Long idTripInv) {
+
+        return tripInvitationService.getFeedBackByTripInv(idTripInv);
     }
 
     @GetMapping("/page")
