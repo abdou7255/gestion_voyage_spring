@@ -19,6 +19,7 @@ public class Profession implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProfession;
+    @Column(nullable = false)
     private String name;
     private String descrition;
 

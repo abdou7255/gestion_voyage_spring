@@ -1,6 +1,5 @@
 package com.esprit.PI.GestionVoyage.controller;
 
-import com.esprit.PI.GestionVoyage.dto.auth.AuthentificationCompanyRequest;
 import com.esprit.PI.GestionVoyage.dto.auth.AuthentificationRequest;
 import com.esprit.PI.GestionVoyage.dto.auth.AuthentificationResponse;
 import com.esprit.PI.GestionVoyage.entities.Company;
@@ -62,22 +61,22 @@ public class AuthentificationController {
     }
 
     @PostMapping("/company")
-    public ResponseEntity authentificateCompany(@RequestBody AuthentificationCompanyRequest authentificationRequest) {
+    public ResponseEntity authentificateCompany(@RequestBody AuthentificationRequest authentificationRequest) {
 
         Authentication aut = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authentificationRequest.getEmailAddress(),
+                        authentificationRequest.getEmail(),
                         authentificationRequest.getPassword()
                 )
         );
         if (aut.isAuthenticated()) {
-            Company company = applicationCompanyDetailsService.loadUserByUsernameAndPassword(authentificationRequest.getEmailAddress(), authentificationRequest.getPassword());
+            Company company = applicationCompanyDetailsService.loadUserByUsernameAndPassword(authentificationRequest.getEmail(), authentificationRequest.getPassword());
             if (company == null) {
 
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body("Entreprise inexistante");
             }
-            String jwt = jwtUtil.generateToken(new User(company.getEmailAddress(), company.getPassword(), Collections.emptyList()));
+            String jwt = jwtUtil.generateToken(new User(company.getEmail(), company.getPassword(), Collections.emptyList()));
             return ResponseEntity.ok(AuthentificationResponse.builder().accesToken(jwt).build());
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)

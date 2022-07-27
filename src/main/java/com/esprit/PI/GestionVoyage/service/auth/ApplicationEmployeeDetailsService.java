@@ -32,6 +32,6 @@ public class ApplicationEmployeeDetailsService implements ApplicationUserDetails
     }
 
     public Employee loadUserByUsernameAndPassword(String email,String password) throws UsernameNotFoundException {
-        return employeeService.findEmployeeByEmailAddressAndPassword(email,password);
+        return employeeService.findEmployeeByEmailAndPassword(email,password);
     }
 }

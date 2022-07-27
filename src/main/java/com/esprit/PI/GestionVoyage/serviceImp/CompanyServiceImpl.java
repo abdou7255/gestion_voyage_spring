@@ -61,15 +61,15 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company findCompanyByEmailAddress(String emailAddress) {
-        Company company = companyRepository.findCompanyByEmailAddress(emailAddress);
+    public Company findCompanyByEmail(String email) {
+        Company company = companyRepository.findCompanyByEmail(email);
         return company;
     }
 
     @Override
-    public Company findCompanyByEmailAddressAndPassword(String emailAddress, String password) {
+    public Company findCompanyByEmailAndPassword(String email, String password) {
 
-        Company company = companyRepository.findCompanyByEmailAddressAndPassword(emailAddress,password);
+        Company company = companyRepository.findCompanyByEmailAndPassword(email,password);
         return company;
     }
 }
