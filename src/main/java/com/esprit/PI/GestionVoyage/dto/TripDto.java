@@ -18,14 +18,16 @@ import java.util.List;
 public class TripDto implements Serializable {
     private Long idTrip;
     private String destination;
-    private String periode;
-    private Date tripDate;
+    private Long duration;
+    private String accommodation;
+    private Date startDate;
+    private Date endDate;
 
     private List<TripInvitationDto> tripInvitations;
 
-    private List<FeedbackDto> feedbacks;
+    private ProgramDto program;
 
-    private List<ProgramDto> programs;
+    private TripTypeDto tripType;
 
-    private TripObjectDto tripObject;
+    private EmployeeDto employee;
 }

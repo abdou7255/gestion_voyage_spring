@@ -1,6 +1,5 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
-import com.esprit.PI.GestionVoyage.entities.Post;
 import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.repository.ProgramRepository;
 import com.esprit.PI.GestionVoyage.service.ProgramService;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Date;
 import java.util.List;
 @Service
 @Slf4j
@@ -22,7 +20,6 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     public Object create(Program entity) {
-        entity.setStartDate(new Date(System.currentTimeMillis()));
         return programRepository.save(entity);
     }
 

@@ -9,4 +9,5 @@ import java.util.List;
 public interface TripInvitationService extends BaseService<TripInvitationDto,Long, TripInvitation>{
     Object  createTripInv(Long idEmpl , Long idTrip , TripInvitation tripInv);
     public Number getFeedBackByTripInv(Long idTripInv);
+    public String accept(Long id);
 }

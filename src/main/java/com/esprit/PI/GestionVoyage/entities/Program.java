@@ -6,6 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Data
@@ -14,25 +18,19 @@ import java.util.Date;
 @Builder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties({ "feedbacks", "trips" })
 public class Program implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProgram;
     @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
-    private String periode;
-    @Column(nullable = false)
-    private Date startDate;
-    @Column(nullable = false)
-    private Date endDate;
 
-    @ManyToOne
-    @JoinColumn (name = "idTrip")
-    private Trip trip;
+    @JsonIgnoreProperties(value="program", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "program",fetch = FetchType.LAZY)
+    private List<Trip> trips;
 
-    @ManyToOne
-    @JoinColumn (name = "idEmployee")
-    private Employee employee;
-
+    @JsonIgnoreProperties(value="program", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "program",fetch = FetchType.LAZY)
+    private List<Feedback> feedbacks;
 }

@@ -19,19 +19,17 @@ public class TripInvitation implements Serializable {
     private Long idTripInvitation;
     @Column(nullable = false)
     private String status;
-    @Column(nullable = false)
-    private String email;
-
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id_employee")
-//    @JoinColumn (name = "idEmployee",insertable = true,updatable = true)
+    @JoinColumn (name = "idEmployee",insertable = true,updatable = false)
     private Employee employee;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id_trip")
-//    @JoinColumn (name = "idTrip",insertable = true,updatable = true)
-    private Trip trip;
+    @JoinColumn (name = "idTrip1",insertable = true,updatable = false)
+    private Trip trip1; // The trip to join
+
+    @ManyToOne
+    @JoinColumn (name = "idTrip2",insertable = true,updatable = false)
+    private Trip trip2; // The trip of the user
 
 }
