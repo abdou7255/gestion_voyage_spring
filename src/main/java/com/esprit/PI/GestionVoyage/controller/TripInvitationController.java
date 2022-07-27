@@ -1,4 +1,5 @@
 package com.esprit.PI.GestionVoyage.controller;
+import com.esprit.PI.GestionVoyage.entities.Feedback;
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
@@ -9,17 +10,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RequestMapping("/tripInvitation")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class TripInvitationController {
 
     @Autowired
     private TripInvitationService tripInvitationService;
 
-    
+    @PostMapping("/addTripInv")
+    public Object create(@RequestParam("idEmp") Long idEmp , @RequestParam("idTrip") Long idTrip, @RequestBody TripInvitation entity) {
+
+        return tripInvitationService.createTripInv(idEmp,idTrip,entity);
+    }
+  
     @PostMapping
     public Object create(@RequestBody TripInvitation entity) {
         Employee testEmp = new Employee();
@@ -53,6 +60,11 @@ public class TripInvitationController {
     public List<TripInvitation> getAll() {
 
         return tripInvitationService.getAll();
+    }
+    @GetMapping("/getFeedBackByTripInv/{id}")
+    public Number getFeedBackByTripInv(@PathVariable("id") Long idTripInv) {
+
+        return tripInvitationService.getFeedBackByTripInv(idTripInv);
     }
 
     @GetMapping("/page")

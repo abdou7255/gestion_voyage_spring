@@ -16,7 +16,9 @@ public class EmployeeInvitaion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployeeInvitation;
+    @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
     private String email;
 
     @ManyToOne

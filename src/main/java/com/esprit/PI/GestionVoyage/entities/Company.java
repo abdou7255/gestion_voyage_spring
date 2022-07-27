@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -19,12 +20,16 @@ public class Company implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCompany;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
 
-    @OneToOne
+
+    @JsonIgnore
+    @OneToMany
     @JoinColumn( name="idEmployee" )
-    private Employee employee;
+    private List<Employee> employees;
 
     @OneToOne
     @JoinColumn( name="idForum" )

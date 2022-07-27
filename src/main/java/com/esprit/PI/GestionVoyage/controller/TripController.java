@@ -1,6 +1,7 @@
 package com.esprit.PI.GestionVoyage.controller;
 
 import com.esprit.PI.GestionVoyage.entities.Employee;
+import com.esprit.PI.GestionVoyage.entities.Feedback;
 import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/trip")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class TripController {
     @Autowired
@@ -64,11 +66,21 @@ public class TripController {
         return tripService.getAll();
     }
 
+    @GetMapping("/getEmployees")
+    public List<Employee> getEmployees(@RequestParam("id") Long id)
+    {
+        return  tripService.getEmployeesByTrip(id);
+    }
     @GetMapping("/page")
     public Page<Trip> getAll(Pageable pageable) {
         return  tripService.getAll(pageable);
     }
 
+    @GetMapping("/getFeedbackByTrip/{id}")
+    public Number getFeedbacks(@PathVariable Long id) {
+        return  tripService.getFeedBackByTrip(id);
+    }
+  
     @GetMapping("/test")
     public Object test() {
         System.out.println("+++++ Creating 3 employees and a Trip for each");
@@ -117,5 +129,4 @@ public class TripController {
         return  "Done";
     }
 
-    
 }

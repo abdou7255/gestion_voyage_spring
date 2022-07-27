@@ -23,8 +23,8 @@ public class Program implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProgram;
+    @Column(nullable = false)
     private String description;
-
 
     @JsonIgnoreProperties(value="program", allowSetters=true,allowGetters = false)
     @OneToMany(mappedBy = "program",fetch = FetchType.LAZY)

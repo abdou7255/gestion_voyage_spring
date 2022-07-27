@@ -21,6 +21,7 @@ public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMessage;
+    @Column(nullable = false)
     private Date dateMessage;
 
     @ManyToOne
