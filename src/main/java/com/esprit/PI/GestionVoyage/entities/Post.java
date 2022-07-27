@@ -20,8 +20,11 @@ public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPost;
+    @Column(nullable = false)
     private String content;
+    @Column(nullable = false)
     private Date updatedDate;
+    @Column(nullable = false)
     private Date createdDate;
 
 

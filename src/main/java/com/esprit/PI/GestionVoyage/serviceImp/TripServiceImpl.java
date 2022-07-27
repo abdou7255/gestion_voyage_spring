@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
+import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
 import com.esprit.PI.GestionVoyage.repository.TripRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -21,8 +23,7 @@ public class TripServiceImpl implements TripService {
     private TripRepository tripRepository;
     @Override
     public Object create(Trip entity) {
-        entity.setTripDate(new Date(System.currentTimeMillis()));
-
+        entity.setTripDate(new Date());
         return tripRepository.save(entity);
     }
 
@@ -57,5 +58,15 @@ public class TripServiceImpl implements TripService {
     public Page<Trip> getAll(Pageable pageable) {
         Page<Trip> zonePage = tripRepository.findAll(pageable);
         return new PageImpl<>(zonePage.getContent(), pageable, zonePage.getTotalElements());
+    }
+
+    @Override
+    public List<Employee> getEmployeesByTrip(Long idTrip) {
+        Trip t= tripRepository.findById(idTrip).get();
+        List<Employee> employees=new ArrayList<>();
+        for (TripInvitation ti : t.getTripInvitations()){
+            employees.add(ti.getEmployee());
+        }
+        return employees;
     }
 }

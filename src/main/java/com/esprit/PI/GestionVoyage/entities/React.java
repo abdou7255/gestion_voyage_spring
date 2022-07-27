@@ -18,6 +18,7 @@ public class React implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReact;
+    @Column(nullable = false)
     private Date reactDate;
 
     @ManyToOne
