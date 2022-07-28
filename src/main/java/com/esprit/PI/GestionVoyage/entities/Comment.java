@@ -18,8 +18,11 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCommment;
+    @Column(nullable = false)
     private String content;
+    @Column(nullable = false)
     private Date updatedDate;
+    @Column(nullable = false)
     private Date createdDate;
 
     @ManyToOne

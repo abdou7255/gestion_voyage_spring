@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
+import com.esprit.PI.GestionVoyage.repository.EmployeeRepository;
 import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
@@ -25,18 +26,20 @@ public class TripInvitationServiceImpl implements TripInvitationService {
 
     @Autowired
     private TripInvitationRepository tripInvitationRepository;
+    @Autowired
+    private TripRepository tripRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private ProgramRepository programRepository;
 
     @Autowired
-    private TripRepository tripRepository;
-
-    @Autowired
     private ProgramService programService;
-    
+
     @Override
     public Object create(TripInvitation entity) {
+
         return tripInvitationRepository.save(entity);
     }
 
@@ -111,5 +114,22 @@ public class TripInvitationServiceImpl implements TripInvitationService {
     public Page<TripInvitation> getAll(Pageable pageable) {
         Page<TripInvitation> zonePage = tripInvitationRepository.findAll(pageable);
         return new PageImpl<>(zonePage.getContent(), pageable, zonePage.getTotalElements());
+    }
+
+    @Override
+    public Object createTripInv(Long idEmpl, Long idTrip, TripInvitation tripInv) {
+        Employee e = employeeRepository.findById(idEmpl).get();
+        Trip t = tripRepository.findById(idTrip).get();
+        tripInv.setEmployee(e);
+        tripInv.setTrip(t);
+
+        return tripInvitationRepository.save(tripInv);
+    }
+
+    @Override
+    public Number getFeedBackByTripInv(Long idTripInv) {
+        TripInvitation ti = tripInvitationRepository.findById(idTripInv).get();
+        return ti.getTrip().getFeedbacks().size();
+
     }
 }

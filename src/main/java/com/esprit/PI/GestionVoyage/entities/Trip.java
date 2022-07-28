@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,7 +23,13 @@ public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTrip;
+    @Column(nullable = false)
     private String destination;
+    @JsonIgnore
+    @JsonIgnoreProperties(value="trip", allowSetters=true,allowGetters = false)
+    @OneToMany(mappedBy = "trip",fetch = FetchType.LAZY)
+    private List<Feedback> feedbacks;
+
     private Long duration;
     private String accommodation;
     private Date startDate;
