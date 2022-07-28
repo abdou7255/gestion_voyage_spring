@@ -80,8 +80,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Trip> getTripsByEmployee(Long idEmp) {
         Employee e = employeeRepository.findById(idEmp).get();
         List<Trip> trips = new ArrayList<>() ;
-        for (TripInvitation ti : e.getTripInvitations()){
-            trips.add(ti.getTrip());
+        for (Trip t : e.getTrips()){
+            trips.add(t);
         }
         return trips;
     }

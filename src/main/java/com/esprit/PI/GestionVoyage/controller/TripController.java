@@ -7,6 +7,7 @@ import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
 import com.esprit.PI.GestionVoyage.entities.TripType;
 import com.esprit.PI.GestionVoyage.service.EmployeeService;
+import com.esprit.PI.GestionVoyage.service.MailService;
 import com.esprit.PI.GestionVoyage.service.ProgramService;
 import com.esprit.PI.GestionVoyage.service.TripInvitationService;
 import com.esprit.PI.GestionVoyage.service.TripService;
@@ -34,6 +35,8 @@ public class TripController {
     private TripInvitationService tripInvitationService;
 	@Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private MailService mailService;
 
     
     @PostMapping
@@ -85,7 +88,7 @@ public class TripController {
     public Object test() {
         System.out.println("+++++ Creating 3 employees and a Trip for each");
         Employee e = new Employee();
-		employeeService.create(e);
+		employeeService.create(null, e);
         SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date d1 = new Date();
         Date d2 = new Date();
@@ -95,11 +98,11 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        Trip t = new Trip(null, "Tunis", 3l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
+        Trip t = new Trip(null, "Tunis", null, 3l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
 
         e = new Employee();
-		employeeService.create(e);
+		employeeService.create(null, e);
         DateFor = new SimpleDateFormat("dd/MM/yyyy");
         d1 = new Date();
         d2 = new Date();
@@ -109,11 +112,11 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        t = new Trip(null, "Tunis", 4l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
+        t = new Trip(null, "Tunis", null, 4l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
 
         e = new Employee();
-		employeeService.create(e);
+		employeeService.create(null, e);
         DateFor = new SimpleDateFormat("dd/MM/yyyy");
         d1 = new Date();
         d2 = new Date();
@@ -123,8 +126,9 @@ public class TripController {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        t = new Trip(null, "Tunis", 6l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
+        t = new Trip(null, "Tunis",null, 6l, "Marriot Hotel", d1, d2, TripType.Business, null, null, null, e);
         tripService.create(t);
+        mailService.sendSimpleEmail(e.getEmail(), "Trip invitation", "You are invited to a new trip program, checkout your invites.");
 
         return  "Done";
     }
