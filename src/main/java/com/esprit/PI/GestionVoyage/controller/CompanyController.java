@@ -27,6 +27,10 @@ public class CompanyController {
 
     @PutMapping("/{id}")
     public Object update(@PathVariable Long id,@RequestBody Company entity) {
+        Company c = companyService.findCompanyByEmail(entity.getEmail());
+        if(c != null && c.getIdCompany() != id) {
+            return new String("cette entreprise existe déja");
+        }
         return companyService.update(id,entity);
     }
 
