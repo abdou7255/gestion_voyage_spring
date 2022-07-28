@@ -21,6 +21,12 @@ public class EmployeeInvitationServiceImpl implements EmployeeInvitationService 
 
 
     @Override
+    public EmployeeInvitaion findEmployeeInvitationByEmail(String email) {
+        EmployeeInvitaion ei = employeeInvitationRepository.findEmployeeInvitationByEmail(email);
+        return ei;
+    }
+
+    @Override
     public Object create(EmployeeInvitaion entity) {
         return employeeInvitationRepository.save(entity);
     }

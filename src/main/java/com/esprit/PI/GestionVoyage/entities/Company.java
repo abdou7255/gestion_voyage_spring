@@ -27,8 +27,7 @@ public class Company implements Serializable {
 
 
     @JsonIgnore
-    @OneToMany
-    @JoinColumn( name="idEmployee" )
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     @OneToOne
