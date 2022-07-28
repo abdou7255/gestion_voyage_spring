@@ -8,4 +8,12 @@ import lombok.Data;
 public class AuthentificationRequest {
     private String email;
     private String password;
+
+    public AuthentificationRequest() {
+    }
+
+    public AuthentificationRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

@@ -19,16 +19,14 @@ public class Feedback implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFeedBack;
     private Date DateFeedBack;
+    @Column(nullable = false)
     private String content;
-
     @ManyToOne
-    @JoinColumn (name = "idEmployee",insertable = false,updatable = false)
+    @JoinColumn (name = "idEmployeeSender")
     private Employee employeeSender;
-
     @ManyToOne
-    @JoinColumn (name = "idEmployee", insertable = false,updatable = false)
+    @JoinColumn (name = "idEmployeeReceiver")
     private Employee employeeReceiver;
-
     @ManyToOne
     @JoinColumn (name = "idTrip")
     private Trip trip;

@@ -20,7 +20,9 @@ public class Forum implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idForum;
+    @Column(nullable = false)
     private Date createdDate;
+    @Column(nullable = false)
     private Date updatedDate;
 
     @OneToOne

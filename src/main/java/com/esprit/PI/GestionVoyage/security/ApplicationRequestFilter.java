@@ -1,6 +1,7 @@
 package com.esprit.PI.GestionVoyage.security;
 
 
+import com.esprit.PI.GestionVoyage.service.auth.ApplicationCompanyDetailsService;
 import com.esprit.PI.GestionVoyage.service.auth.ApplicationEmployeeDetailsService;
 import com.esprit.PI.GestionVoyage.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,13 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
     @Autowired
     private ApplicationEmployeeDetailsService applicationUserDetailsService;
+    @Autowired
+    private ApplicationCompanyDetailsService applicationCompanyDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+
+        String path = httpServletRequest.getRequestURI();
 
         String authHeader=httpServletRequest.getHeader("Authorization");// f header mteaa request lezem ykoun aandy authorization
         String userName=null;
@@ -37,7 +42,12 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
             userName= jwtUtil.extractUsername(jwt);
         }
         if(userName != null&& SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails userDetails=applicationUserDetailsService.loadUserByUsername(userName);
+            UserDetails userDetails = null;
+            if(path.contains("employee")) {
+                userDetails=applicationUserDetailsService.loadUserByUsername(userName);
+            } else if(path.contains("company")){
+                userDetails=applicationCompanyDetailsService.loadUserByUsername(userName);
+            }
             if(jwtUtil.validateToken(jwt,userDetails)){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=
                         new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());

@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.controller;
 
+import com.esprit.PI.GestionVoyage.entities.ActivityDomain;
 import com.esprit.PI.GestionVoyage.entities.Profession;
 import com.esprit.PI.GestionVoyage.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/profession")
+@RequestMapping("/employee/profession")
 @CrossOrigin
 @RestController
 public class ProfessionController {
@@ -18,18 +19,12 @@ public class ProfessionController {
     private ProfessionService professionService;
     @PostMapping
     public Object create(@RequestBody Profession entity) {
-
-        return professionService.create(entity);
-    }
-
-    @PutMapping("/{id}")
-    public Object update(@PathVariable Long id,@RequestBody Profession entity) {
-        return professionService.update(id,entity);
-    }
-
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id) {
-        return professionService.delete(id);
+        Profession profession = professionService.findOneByName(entity.getName());
+        if (profession == null) {
+            return professionService.create(entity);
+        } else {
+            return new String("Profession exist !");
+        }
     }
 
     @GetMapping("/{id}")
@@ -47,6 +42,23 @@ public class ProfessionController {
     @GetMapping("/page")
     public Page<Profession> getAll(Pageable pageable) {
         return  professionService.getAll(pageable);
+    }
+
+    @PutMapping("/{id}")
+    public Object update(@PathVariable Long id,@RequestBody Profession entity) {
+        Profession profession = professionService.findOneByName(entity.getName());
+        if (profession == null) {
+            return professionService.update(id, entity);
+        } else if(profession.getIdProfession() == id) {
+            return professionService.update(id, entity);
+        }else {
+            return new String("Profession exist !");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable Long id) {
+        return professionService.delete(id);
     }
 
 }

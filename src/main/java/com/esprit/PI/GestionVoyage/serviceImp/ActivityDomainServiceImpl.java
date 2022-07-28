@@ -24,6 +24,11 @@ public class ActivityDomainServiceImpl implements ActivityDomanService {
 
 
     @Override
+    public ActivityDomain findOneByName(String name) {
+        return activityDomainRepository.findOneByName(name);
+    }
+
+    @Override
     public Object create(ActivityDomain entity) {
         return activityDomainRepository.save(entity);
     }

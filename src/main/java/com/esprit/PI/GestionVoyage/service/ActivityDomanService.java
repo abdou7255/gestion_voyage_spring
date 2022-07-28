@@ -4,4 +4,5 @@ import com.esprit.PI.GestionVoyage.dto.ActivityDomainDto;
 import com.esprit.PI.GestionVoyage.entities.ActivityDomain;
 
 public interface ActivityDomanService extends BaseService<ActivityDomainDto,Long, ActivityDomain>{
+    ActivityDomain findOneByName(String name);
 }

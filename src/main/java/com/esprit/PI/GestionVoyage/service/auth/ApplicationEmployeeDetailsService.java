@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.service.auth;
 
+import com.esprit.PI.GestionVoyage.entities.Company;
 import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,16 @@ public class ApplicationEmployeeDetailsService implements ApplicationUserDetails
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       Employee emp=employeeService.findEmployeeByEmail(email);
-        return new User(emp.getEmail(),emp.getPassword(), Collections.emptyList());
+        Employee emp=employeeService.findEmployeeByEmail(email);
+        if(emp != null){
+            return new User(emp.getEmail(),emp.getPassword(), Collections.emptyList());
+        }else {
+            throw new UsernameNotFoundException("Employee inexistante");
+        }
+
+    }
+
+    public Employee loadUserByUsernameAndPassword(String email,String password) throws UsernameNotFoundException {
+        return employeeService.findEmployeeByEmailAndPassword(email,password);
     }
 }
