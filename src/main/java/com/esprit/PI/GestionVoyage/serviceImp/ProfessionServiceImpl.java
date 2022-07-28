@@ -1,5 +1,6 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
+import com.esprit.PI.GestionVoyage.entities.ActivityDomain;
 import com.esprit.PI.GestionVoyage.entities.Post;
 import com.esprit.PI.GestionVoyage.entities.Profession;
 import com.esprit.PI.GestionVoyage.repository.ProfessionRepository;
@@ -18,6 +19,11 @@ import java.util.List;
 public class ProfessionServiceImpl implements ProfessionService {
     @Autowired
     private ProfessionRepository professionRepository;
+
+    @Override
+    public Profession findOneByName(String name) {
+        return professionRepository.findOneByName(name);
+    }
     @Override
     public Object create(Profession entity) {
         return professionRepository.save(entity);
