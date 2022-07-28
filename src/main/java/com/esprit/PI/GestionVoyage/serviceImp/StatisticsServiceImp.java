@@ -38,16 +38,20 @@ public class StatisticsServiceImp implements StatisticService {
         return c.getEmployees();
     }
 
+    //conflict
     @Override
     public Integer employeesByTrip(Long idTrip) {
-        Trip t = tripRepository.findById(idTrip).get();
+        /*Trip t = tripRepository.findById(idTrip).get();
         List<Program> programs= t.getPrograms();
         List<Employee> employees=new ArrayList<>();
         for ( Program p : programs){
             employees.add(p.getEmployee());
         }
         return employees.size();
+        */
+        return 0;
     }
+     
 
     @Override
     public Integer followersByEmployee(Long idEmployee) {

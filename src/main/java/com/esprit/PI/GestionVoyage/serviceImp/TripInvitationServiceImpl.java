@@ -1,6 +1,7 @@
 package com.esprit.PI.GestionVoyage.serviceImp;
 
 import com.esprit.PI.GestionVoyage.repository.EmployeeRepository;
+import com.esprit.PI.GestionVoyage.entities.Employee;
 import com.esprit.PI.GestionVoyage.entities.Program;
 import com.esprit.PI.GestionVoyage.entities.Trip;
 import com.esprit.PI.GestionVoyage.entities.TripInvitation;
@@ -121,7 +122,7 @@ public class TripInvitationServiceImpl implements TripInvitationService {
         Employee e = employeeRepository.findById(idEmpl).get();
         Trip t = tripRepository.findById(idTrip).get();
         tripInv.setEmployee(e);
-        tripInv.setTrip(t);
+        tripInv.setTrip2(t);
 
         return tripInvitationRepository.save(tripInv);
     }
@@ -129,7 +130,7 @@ public class TripInvitationServiceImpl implements TripInvitationService {
     @Override
     public Number getFeedBackByTripInv(Long idTripInv) {
         TripInvitation ti = tripInvitationRepository.findById(idTripInv).get();
-        return ti.getTrip().getFeedbacks().size();
+        return ti.getTrip2().getFeedbacks().size();
 
     }
 }

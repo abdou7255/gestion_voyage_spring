@@ -111,7 +111,7 @@ public class TripServiceImpl implements TripService {
     public List<Employee> getEmployeesByTrip(Long idTrip) {
         Trip t= tripRepository.findById(idTrip).get();
         List<Employee> employees=new ArrayList<>();
-        for (TripInvitation ti : t.getTripInvitations()){
+        for (TripInvitation ti : t.getTripInvitations2()){
             employees.add(ti.getEmployee());
         }
         return employees;
